@@ -1,0 +1,28 @@
+
+<section class="product">
+
+  <header class="product__header">
+    <section class="product__title"
+             [highlight]="searchTermProps"
+             [innerText]="productProps.title">
+      {{ productProps.title }}</section>
+  </header>
+
+  <main class="product__body">
+    <section class="product__section">
+      <img src="{{ productProps.image }}" alt="{{ productProps.title }}" class="product__image">
+    </section>
+    <section class="product__description"
+             [highlight]="searchTermProps"
+             [innerText]="productProps.description">
+      {{ productProps.description }}
+    </section>
+  </main>
+
+  <footer class="product__footer">
+    <section class="product__actions">
+      <button (click)="selectProduct(productProps.id)">Move to </button>
+    </section>
+  </footer>
+
+</section>

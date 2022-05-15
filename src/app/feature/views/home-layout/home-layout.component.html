@@ -1,1 +1,18 @@
 <p>home-layout works!</p>
+<input  #control type="text" [(ngModel)]="searchString">
+
+<section class="loading" *ngIf="(isLoading$ | async);else content">
+  <h1>LOADING</h1>
+</section>
+
+<ng-template #content>
+
+  <section class="products">
+    <app-product
+      *ngFor="let product of (allProducts  | searchProduct:searchString)"
+      [productProps]="product"
+      [searchTermProps]="searchString"
+    ></app-product>
+  </section>
+
+</ng-template>
