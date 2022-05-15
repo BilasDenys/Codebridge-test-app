@@ -1,1 +1,26 @@
-<p>product-layout works!</p>
+
+<a [routerLink]="['/']">Go To Shop</a>
+
+<section class="product">
+  <header class="product__header" >
+    <section class="product__title">
+      {{ (product$ | async)?.title }}
+    </section>
+  </header>
+  <main class="product__body">
+    <section class="product__image_box">
+      <img src="{{ (product$ | async)?.image }}" alt="" class="product__image">
+    </section>
+    <section class="product__about">
+      <section class="product__category">
+        {{ (product$ | async)?.category }}
+      </section>
+      <section class="product__price">
+        {{ ( product$ | async)?.price }}
+      </section>
+    </section>
+    <section class="product__description">
+      {{ (product$ | async)?.description }}
+    </section>
+  </main>
+</section>

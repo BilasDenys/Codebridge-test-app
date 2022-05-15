@@ -6,7 +6,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { MainLayoutComponent } from './views/main-layout/main-layout.component';
 import { HomeLayoutComponent } from './views/home-layout/home-layout.component';
 import { ProductLayoutComponent } from './views/product-layout/product-layout.component';
-import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
+import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
+import { StoreModule } from '@ngrx/store';
+
+import * as fromFakeStore from './store/reducers/fake-store.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { fakeStoreEffects } from './store';
+import { ProductComponent } from './components/product/product.component';
 
 const routes: Routes = [
   { path: '', component: MainLayoutComponent, children: [
@@ -21,12 +27,15 @@ const routes: Routes = [
   declarations: [
     MainLayoutComponent,
     HomeLayoutComponent,
-    ProductLayoutComponent
+    ProductLayoutComponent,
+    ProductComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    StoreModule.forFeature('fakeStore', fromFakeStore.reducer),
+    EffectsModule.forFeature(fakeStoreEffects)
   ],
   exports: [RouterModule]
 })

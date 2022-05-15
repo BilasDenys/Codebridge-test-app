@@ -1,0 +1,22 @@
+
+.product {
+  width: 400px;
+  min-height: 600px;
+  border: 1px solid #2d2d2d;
+  border-radius: 5px;
+  margin: .25rem;
+  padding: .5rem;
+
+  &__image {
+    width: inherit;
+    height: inherit;
+  }
+
+  &__section {
+    display: flex;
+    justify-content: center;
+    width: 350px;
+    height: 350px;
+  }
+
+}
