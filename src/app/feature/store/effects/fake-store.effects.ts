@@ -29,7 +29,7 @@ export class FakeStoreEffects {
         map((products: IProduct[]) => {
          return new FetchAllProductsSuccess(products)
         }),
-        catchError(error => of(new FetchAllProductsFail(error)))
+        catchError(error => of(new FetchAllProductsFail(error.message)))
       )
     )
   ))
@@ -42,7 +42,7 @@ export class FakeStoreEffects {
         map((product: IProduct) => {
           return new FetchSingleProductSuccess(product)
         }),
-        catchError(error => of(new FetchSingleProductFail(error)))
+        catchError(error => of(new FetchSingleProductFail(error.message)))
       )
     )
   ))

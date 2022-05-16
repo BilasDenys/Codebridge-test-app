@@ -3,7 +3,11 @@ import * as fromFakeStore from '../../store/reducers/fake-store.reducer';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { IProduct } from '../../models/fake-store-models';
-import { getIsLoadingSelector, getSingleProductSelector } from '../../store/selectors/fake-store.selector';
+import {
+  getErrorSelector,
+  getIsLoadingSelector,
+  getSingleProductSelector
+} from '../../store/selectors/fake-store.selector';
 import { SelectSingleProduct, UnselectSingleProduct } from '../../store/actions/fake-store.actions';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -18,6 +22,7 @@ export class ProductLayoutComponent implements OnInit, OnDestroy {
 
   public product$: Observable<IProduct | null>;
   public isLoading$: Observable<boolean>;
+  public errorMessage$: Observable<string>
 
   constructor(
     private store$: Store<fromFakeStore.IState>,
@@ -32,6 +37,7 @@ export class ProductLayoutComponent implements OnInit, OnDestroy {
       });
     this.isLoading$ = this.store$.pipe(select(getIsLoadingSelector));
     this.product$ = this.store$.pipe(select(getSingleProductSelector));
+    this.errorMessage$ = this.store$.pipe(select(getErrorSelector))
   }
 
   ngOnDestroy() {

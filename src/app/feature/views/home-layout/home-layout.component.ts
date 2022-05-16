@@ -2,7 +2,11 @@ import { Component,  OnInit } from '@angular/core';
 import { FakeStoreService } from '../../services/fake-store.service';
 import * as fromFakeStore from '../../store/reducers/fake-store.reducer'
 import { select, Store } from '@ngrx/store';
-import { getAllProductsSelector, getIsLoadingSelector } from '../../store/selectors/fake-store.selector';
+import {
+  getAllProductsSelector,
+  getErrorSelector,
+  getIsLoadingSelector
+} from '../../store/selectors/fake-store.selector';
 import { FetchAllProducts } from '../../store/actions/fake-store.actions';
 import { IProduct } from '../../models/fake-store-models';
 import { Observable} from 'rxjs';
@@ -18,6 +22,7 @@ export class HomeLayoutComponent implements OnInit {
 
   public allProducts: IProduct[] ;
   public isLoading$: Observable<boolean>;
+  public errorMessage$: Observable<string>;
   public searchString = '';
 
   constructor(
@@ -34,7 +39,8 @@ export class HomeLayoutComponent implements OnInit {
       untilDestroyed(this)
     ).subscribe((allProduct: IProduct[]) => {
       this.allProducts = allProduct;
-    });
+    })
+    this.errorMessage$ = this.store$.pipe(select(getErrorSelector));
   }
 
 }

@@ -25,7 +25,7 @@ export class FetchAllProductsSuccess implements  Action {
 
 export class FetchAllProductsFail implements  Action {
   readonly type =  FakeStoreActionTypes.FETCH_ALL_PRODUCTS_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: string) {}
 }
 
 export class SelectSingleProduct implements  Action {
@@ -44,7 +44,7 @@ export class FetchSingleProductSuccess implements  Action {
 
 export class FetchSingleProductFail implements  Action {
   readonly type =  FakeStoreActionTypes.FETCH_SINGLE_PRODUCT_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: string) {}
 }
 
 
@@ -55,3 +55,4 @@ export type FakeStoreActions = FetchAllProducts |
   | UnselectSingleProduct
   | FetchSingleProductSuccess
   | FetchSingleProductFail;
+

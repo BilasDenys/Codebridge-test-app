@@ -14,6 +14,10 @@
         <app-spinner></app-spinner>
       </section>
 
+      <section class="error_message" *ngIf="(errorMessage$ | async)">
+        {{ errorMessage$ | async }}
+      </section>
+
       <ng-template #content>
           <mat-card class="product">
             <mat-card-header class="product__header">
