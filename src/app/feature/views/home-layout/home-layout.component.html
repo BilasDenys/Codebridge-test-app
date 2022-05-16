@@ -1,0 +1,36 @@
+
+<section class="home_layout">
+  <section class="container">
+
+    <header class="home_layout__header header">
+
+      <mat-form-field class="form-field" appearance="fill">
+        <mat-label>Search</mat-label>
+        <div class="wrapper">
+          <input class="form-control"  matInput type="text" [(ngModel)]="searchString">
+
+        </div>
+        <button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear" (click)="searchString=''">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+    </header>
+
+    <section class="loading" *ngIf="(isLoading$ | async);else content">
+      <app-spinner></app-spinner>
+    </section>
+
+    <ng-template #content>
+      <section class="products">
+        <app-product
+          *ngFor="let product of (allProducts  | searchProduct:searchString)"
+          [productProps]="product"
+          [searchTermProps]="searchString"
+        ></app-product>
+      </section>
+    </ng-template>
+
+  </section>
+
+</section>
