@@ -1,0 +1,48 @@
+<section class="product_layout">
+  <section class="container">
+
+    <header class="product_layout__header header">
+      <mat-chip-list aria-label="Fish selection">
+        <a [routerLink]="['/']">
+          <mat-chip>Go Back To Shop</mat-chip>
+        </a>
+      </mat-chip-list>
+    </header>
+
+    <main class="product_layout__body">
+      <section class="loading" *ngIf="(isLoading$ | async);else content">
+        <app-spinner></app-spinner>
+      </section>
+
+      <ng-template #content>
+          <mat-card class="product">
+            <mat-card-header class="product__header">
+              <mat-card-subtitle class="product__category">  {{ (product$ | async)?.category }}</mat-card-subtitle>
+              <mat-card-title
+                class="product__title">
+                {{ (product$ | async)?.title }}
+              </mat-card-title>
+
+            </mat-card-header>
+            <section class="product__section">
+              <img src="{{ (product$ | async)?.image }}" alt="{{ (product$ | async)?.title }}" class="product__image">
+            </section>
+            <mat-card-content>
+              <section class="product__price"
+              >
+                {{ ( product$ | async)?.price | currency }}
+              </section>
+              <section class="product__description">
+                {{ (product$ | async)?.description }}
+              </section>
+            </mat-card-content>
+          </mat-card>
+      </ng-template>
+    </main>
+
+
+  </section>
+
+</section>
+
+
