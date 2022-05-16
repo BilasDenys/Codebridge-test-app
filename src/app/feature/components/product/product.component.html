@@ -1,28 +1,36 @@
 
-<section class="product">
+<mat-card class="product">
+  <mat-card-header>
+<!--    <section mat-card-avatar class="example-header-image"></section>-->
+    <mat-card-subtitle class="product__category">{{productProps.category}}</mat-card-subtitle>
+    <mat-card-title
+      class="product__title"
+      [highlight]="searchTermProps"
+      [innerText]="productProps.title"
+    >
+      {{ productProps.title }}
+    </mat-card-title>
 
-  <header class="product__header">
-    <section class="product__title"
-             [highlight]="searchTermProps"
-             [innerText]="productProps.title">
-      {{ productProps.title }}</section>
-  </header>
-
-  <main class="product__body">
-    <section class="product__section">
-      <img src="{{ productProps.image }}" alt="{{ productProps.title }}" class="product__image">
+  </mat-card-header>
+  <section class="product__section">
+    <img mat-card-image class="product__image" src="{{ productProps.image }}" alt="{{productProps.title}}">
+  </section>
+  <mat-card-content>
+    <section class="product__price"
+             >
+      {{productProps.price | currency}}
     </section>
     <section class="product__description"
              [highlight]="searchTermProps"
              [innerText]="productProps.description">
-      {{ productProps.description }}
+      <mat-icon>euro_symbol</mat-icon>{{ productProps.description }}
     </section>
-  </main>
-
+  </mat-card-content>
   <footer class="product__footer">
-    <section class="product__actions">
-      <button (click)="selectProduct(productProps.id)">Move to </button>
-    </section>
+    <mat-card-actions>
+      <a mat-stroked-button
+         (click)="selectProduct(productProps.id)"
+         [routerLink]="['/product/', productProps.id]">Move to</a>
+    </mat-card-actions>
   </footer>
-
-</section>
+</mat-card>
