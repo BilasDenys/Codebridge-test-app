@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import {
   getAllProductsSelector,
   getErrorSelector,
-  getIsLoadingSelector
+  getIsLoadingSelector, getLengthSearchOfProductsSelector
 } from '../../store/selectors/fake-store.selector';
 import { FetchAllProducts } from '../../store/actions/fake-store.actions';
 import { IProduct } from '../../models/fake-store-models';
@@ -23,6 +23,7 @@ export class HomeLayoutComponent implements OnInit {
   public allProducts: IProduct[] ;
   public isLoading$: Observable<boolean>;
   public errorMessage$: Observable<string>;
+  public lengthOfSearchProducts$: Observable<number>
   public searchString = '';
 
   constructor(
@@ -33,7 +34,8 @@ export class HomeLayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.store$.dispatch(new FetchAllProducts());
-    this.isLoading$ = this.store$.pipe(select(getIsLoadingSelector))
+    this.isLoading$ = this.store$.pipe(select(getIsLoadingSelector));
+    this.lengthOfSearchProducts$ = this.store$.pipe(select(getLengthSearchOfProductsSelector))
     this.store$.pipe(
       select(getAllProductsSelector),
       untilDestroyed(this)

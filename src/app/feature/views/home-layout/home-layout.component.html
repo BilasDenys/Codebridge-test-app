@@ -3,7 +3,6 @@
   <section class="container">
 
     <header class="home_layout__header header">
-
       <mat-form-field class="form-field" appearance="fill">
         <mat-label>Search</mat-label>
         <div class="wrapper">
@@ -14,7 +13,6 @@
           <mat-icon>close</mat-icon>
         </button>
       </mat-form-field>
-
     </header>
 
     <section class="loading" *ngIf="(isLoading$ | async);else content">
@@ -26,11 +24,16 @@
     </section>
 
     <ng-template #content>
+      <section class="total-result">
+       Total Results:  {{ lengthOfSearchProducts$ | async }}
+        <hr>
+      </section>
       <section class="products">
         <app-product
-          *ngFor="let product of (allProducts  | searchProduct:searchString)"
+          *ngFor="let product of ( allProducts  | searchProduct:searchString  ) as result"
           [productProps]="product"
           [searchTermProps]="searchString"
+          [resultProps]="result.length"
         ></app-product>
       </section>
     </ng-template>

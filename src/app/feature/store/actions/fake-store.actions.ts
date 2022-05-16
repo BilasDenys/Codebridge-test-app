@@ -12,6 +12,8 @@ export enum FakeStoreActionTypes {
   FETCH_SINGLE_PRODUCT_SUCCESS = '[FakeStoreAPI] Fetch Single Product SUCCESS',
   FETCH_SINGLE_PRODUCT_FAIL = '[FakeStoreAPI] Fetch Single Product FAIL',
 
+  SET_LENGTH_OF_SEARCH_PRODUCTS = '[FakeStoreAPI] Set length of search Products'
+
 }
 
 export class FetchAllProducts implements  Action {
@@ -47,6 +49,11 @@ export class FetchSingleProductFail implements  Action {
   constructor(public payload: string) {}
 }
 
+export class SetLengthOfSearchProducts implements  Action {
+  readonly type =  FakeStoreActionTypes.SET_LENGTH_OF_SEARCH_PRODUCTS
+  constructor(public payload: number) {}
+}
+
 
 export type FakeStoreActions = FetchAllProducts |
   FetchAllProductsSuccess
@@ -54,5 +61,6 @@ export type FakeStoreActions = FetchAllProducts |
   | SelectSingleProduct
   | UnselectSingleProduct
   | FetchSingleProductSuccess
-  | FetchSingleProductFail;
+  | FetchSingleProductFail
+  | SetLengthOfSearchProducts;
 

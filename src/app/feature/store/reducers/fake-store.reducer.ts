@@ -5,6 +5,7 @@ export interface IState {
   isLoading: boolean,
   allProducts: IProduct[],
   singleProduct: IProduct | null,
+  lengthOfSearchProducts: number;
   error: any
 }
 
@@ -12,6 +13,7 @@ const initialState: IState = {
   isLoading: false,
   allProducts: [],
   singleProduct: null,
+  lengthOfSearchProducts: 0,
   error: ''
 }
 
@@ -38,6 +40,9 @@ export const reducer = (state = initialState, action: FakeStoreActions) => {
 
       case FakeStoreActionTypes.FETCH_SINGLE_PRODUCT_FAIL:
         return { ...state, isLoading: false, error: action.payload }
+
+      case FakeStoreActionTypes.SET_LENGTH_OF_SEARCH_PRODUCTS:
+        return { ...state, lengthOfSearchProducts: action.payload }
 
       default:
         return state

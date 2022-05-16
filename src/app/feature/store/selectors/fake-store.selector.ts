@@ -21,6 +21,11 @@ export const getSingleProductSelector = createSelector(
 
 export const getErrorSelector = createSelector(
   fakeStoreFeatureSelector,
-  (state: fromFakeStore.IState): any => state.singleProduct
+  (state: fromFakeStore.IState): any => state.error
+)
+
+export const getLengthSearchOfProductsSelector = createSelector(
+  fakeStoreFeatureSelector,
+  (state: fromFakeStore.IState): any => state.lengthOfSearchProducts
 )
 

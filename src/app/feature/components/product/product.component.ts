@@ -1,6 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { IProduct } from '../../models/fake-store-models';
-import { SelectSingleProduct } from '../../store/actions/fake-store.actions';
+import { SelectSingleProduct, SetLengthOfSearchProducts } from '../../store/actions/fake-store.actions';
 import { Store } from '@ngrx/store';
 import * as fromFakeStore from '../../store/reducers/fake-store.reducer';
 
@@ -9,12 +9,19 @@ import * as fromFakeStore from '../../store/reducers/fake-store.reducer';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnChanges {
 
   @Input() productProps: IProduct;
   @Input() searchTermProps: string;
+  @Input() resultProps: any;
 
   constructor(private store$: Store<fromFakeStore.IState>) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ( changes ) {
+      this.store$.dispatch(new SetLengthOfSearchProducts(this.resultProps));
+    }
+  }
 
   ngOnInit(): void {
   }
