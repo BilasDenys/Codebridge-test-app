@@ -10,11 +10,11 @@ export class FakeStoreService {
 
   constructor(private http: HttpClient) { }
 
-  getAllProducts(): Observable<IProduct[]> {
+  public getAllProducts(): Observable<IProduct[]> {
     return this.http.get<IProduct[]>('https://fakestoreapi.com/products');
   }
 
-  getSingleProduct(id: number): Observable<IProduct> {
+  public getSingleProduct(id: number): Observable<IProduct> {
     return this.http.get<IProduct>(`https://fakestoreapi.com/products/${ id }`);
   }
 

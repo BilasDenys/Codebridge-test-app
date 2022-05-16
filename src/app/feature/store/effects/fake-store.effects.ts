@@ -25,6 +25,7 @@ export class FakeStoreEffects {
     ofType(FakeStoreActionTypes.FETCH_ALL_PRODUCTS),
     switchMap((action: FetchAllProducts) =>
       this.fakeStoreService.getAllProducts().pipe(
+        delay(1500),
         map((products: IProduct[]) => {
          return new FetchAllProductsSuccess(products)
         }),
@@ -37,6 +38,7 @@ export class FakeStoreEffects {
     ofType(FakeStoreActionTypes.SELECT_SINGLE_PRODUCT),
     switchMap(({ type, payload }: SelectSingleProduct) =>
       this.fakeStoreService.getSingleProduct(payload).pipe(
+        delay(1500),
         map((product: IProduct) => {
           return new FetchSingleProductSuccess(product)
         }),

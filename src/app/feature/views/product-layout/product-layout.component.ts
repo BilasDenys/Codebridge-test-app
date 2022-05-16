@@ -14,9 +14,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class ProductLayoutComponent implements OnInit, OnDestroy {
 
-  product$: Observable<IProduct | null>;
-  isLoading$: Observable<boolean>;
-  subscription$: Subscription;
+  public product$: Observable<IProduct | null>;
+  public isLoading$: Observable<boolean>;
+  private subscription$: Subscription;
 
   constructor(
     private store$: Store<fromFakeStore.IState>,
@@ -24,11 +24,9 @@ export class ProductLayoutComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-
     this.subscription$ = this.router.params.subscribe((params: Params) => {
         params['id'] ? this.store$.dispatch(new SelectSingleProduct(params['id'])) : null
       });
-
     this.isLoading$ = this.store$.pipe(select(getIsLoadingSelector));
     this.product$ = this.store$.pipe(select(getSingleProductSelector));
   }

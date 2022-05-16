@@ -1,7 +1,29 @@
 
 .products {
-  max-width: 900px;
-  width: 100%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+  margin: .5rem;
 }
+
+.header {
+  top: 60px;
+  display: flex;
+  justify-content: center;
+
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
+}
+
+.form-field {
+  margin: 1.5rem;
+  max-width: 1140px;
+  width: 100%;
+}
+
+
+

@@ -1,1 +1,7 @@
 
+@import 'src/styles';
+
+.toolbar {
+  box-shadow: $box-shadow-toolbar;
+  background: #ffffff;
+}
