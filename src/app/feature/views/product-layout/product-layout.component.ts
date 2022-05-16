@@ -6,7 +6,9 @@ import { IProduct } from '../../models/fake-store-models';
 import { getIsLoadingSelector, getSingleProductSelector } from '../../store/selectors/fake-store.selector';
 import { SelectSingleProduct, UnselectSingleProduct } from '../../store/actions/fake-store.actions';
 import { ActivatedRoute, Params } from '@angular/router';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-product-layout',
   templateUrl: './product-layout.component.html',
@@ -16,7 +18,6 @@ export class ProductLayoutComponent implements OnInit, OnDestroy {
 
   public product$: Observable<IProduct | null>;
   public isLoading$: Observable<boolean>;
-  private subscription$: Subscription;
 
   constructor(
     private store$: Store<fromFakeStore.IState>,
@@ -24,7 +25,9 @@ export class ProductLayoutComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.subscription$ = this.router.params.subscribe((params: Params) => {
+    this.router.params.pipe(
+      untilDestroyed(this))
+      .subscribe((params: Params) => {
         params['id'] ? this.store$.dispatch(new SelectSingleProduct(params['id'])) : null
       });
     this.isLoading$ = this.store$.pipe(select(getIsLoadingSelector));
@@ -33,7 +36,6 @@ export class ProductLayoutComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.store$.dispatch(new UnselectSingleProduct());
-    this.subscription$.unsubscribe();
   }
 
 

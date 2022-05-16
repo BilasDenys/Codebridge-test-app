@@ -6,7 +6,9 @@ import { getAllProductsSelector, getIsLoadingSelector } from '../../store/select
 import { FetchAllProducts } from '../../store/actions/fake-store.actions';
 import { IProduct } from '../../models/fake-store-models';
 import { Observable} from 'rxjs';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-home-layout',
   templateUrl: './home-layout.component.html',
@@ -27,7 +29,10 @@ export class HomeLayoutComponent implements OnInit {
   ngOnInit(): void {
     this.store$.dispatch(new FetchAllProducts());
     this.isLoading$ = this.store$.pipe(select(getIsLoadingSelector))
-    this.store$.pipe(select(getAllProductsSelector)).subscribe((allProduct: IProduct[]) => {
+    this.store$.pipe(
+      select(getAllProductsSelector),
+      untilDestroyed(this)
+    ).subscribe((allProduct: IProduct[]) => {
       this.allProducts = allProduct;
     });
   }
