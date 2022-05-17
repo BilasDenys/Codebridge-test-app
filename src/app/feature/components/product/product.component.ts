@@ -19,7 +19,10 @@ export class ProductComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if ( changes ) {
-      this.store$.dispatch(new SetLengthOfSearchProducts(this.resultProps));
+      this.searchTermProps.trim().length === 0 ?
+        this.store$.dispatch(new SetLengthOfSearchProducts(0))
+        :
+        this.store$.dispatch(new SetLengthOfSearchProducts(this.resultProps));
     }
   }
 
